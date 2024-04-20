@@ -10,24 +10,18 @@ RUN apt-get update && \
 ENV SRVPORT=4499
 ENV RSPFILE=response
 
+# Copy the script containing the function definition
+COPY handleRequest.sh /
+
+# Make the script executable
+RUN chmod +x /handleRequest.sh
+
 # Remove any existing response file and create a named pipe
 RUN rm -f $RSPFILE && \
     mkfifo $RSPFILE
 
-# Define a function to handle API requests
-RUN handleRequest() { \
-    read line; \
-    mod=$(fortune); \
-    cat <<EOF > $RSPFILE \
-HTTP/1.1 200
-
-
-<pre>\$(cowsay \$mod)</pre>
-EOF
-}
-
 # Expose the port on which the application will run
 EXPOSE $SRVPORT
 
-# Run the application
-CMD while true; do cat $RSPFILE | nc -lN $SRVPORT | handleRequest; sleep 0.01; done
+# Run the application using the script
+CMD /bin/bash -c "/handleRequest.sh"
