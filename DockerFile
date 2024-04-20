@@ -1,0 +1,33 @@
+# Use a base image with necessary dependencies
+FROM ubuntu:latest
+
+# Install required packages
+RUN apt-get update && \
+    apt-get install -y fortune-mod cowsay netcat && \
+    rm -rf /var/lib/apt/lists/*
+
+# Set environment variables
+ENV SRVPORT=4499
+ENV RSPFILE=response
+
+# Remove any existing response file and create a named pipe
+RUN rm -f $RSPFILE && \
+    mkfifo $RSPFILE
+
+# Define a function to handle API requests
+RUN handleRequest() { \
+    read line; \
+    mod=$(fortune); \
+    cat <<EOF > $RSPFILE \
+HTTP/1.1 200
+
+
+<pre>\$(cowsay \$mod)</pre>
+EOF
+}
+
+# Expose the port on which the application will run
+EXPOSE $SRVPORT
+
+# Run the application
+CMD while true; do cat $RSPFILE | nc -lN $SRVPORT | handleRequest; sleep 0.01; done
