@@ -1,4 +1,4 @@
-## Build the Docker image:
+# Build the Docker image:
  --> docker build -t wisecow-app .
  
 ## Replace wisecow-app with the desired name for your Docker image.
@@ -15,3 +15,8 @@
 
 ## Push the tagged image to the registry:
 --> docker push yourusername/wisecow-app
+
+# Apply Manifests:
+--> kubectl apply -f wisecow-deployment.yaml
+
+--> kubectl apply -f wisecow-service.yaml
