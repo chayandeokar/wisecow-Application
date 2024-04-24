@@ -1,7 +1,7 @@
 # Build the Docker image:
  --> docker build -t wisecow-app .
  
-# FROM BASICALLY RUNNS Things
+# FROM BASICALLY RUNNS and Create Build Stage
 ## Replace wisecow-app with the desired name for your Docker image.
 ### Verify the Docker image:
 --> docker images
