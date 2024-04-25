@@ -23,5 +23,5 @@ RUN rm -f $RSPFILE && \
 # Expose the port on which the application will run
 EXPOSE $SRVPORT
 
-# Run the application using the script
+# Run the application using the scripts
 CMD /bin/bash -c "/handleRequest.sh"
