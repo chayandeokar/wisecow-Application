@@ -11,7 +11,7 @@
 --> docker run -d -p 4499:4499 wisecow-app
 
 ## This command will start a container in detached mode (-d) and map port 4499 of the container to port 4499 on your host system (-p 4499:4499).
-### Push the Docker image to a container registry (optional):
+### Push the Docker image to a container registry
 --> docker tag wisecow-app yourusername/wisecow-app
 
 ## Push the tagged image to the registry:
