@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: wisecow-deployment
 spec:
-  replicas: 3  # Specify the desired number of pod replicas
+  replicas: 1  # Specify the desired number of pod replicas
   selector:
     matchLabels:
       app: wisecow
